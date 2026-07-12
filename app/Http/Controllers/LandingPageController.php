@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LandingPageController extends Controller
 {
@@ -34,8 +35,8 @@ class LandingPageController extends Controller
         
         // Determine dashboard route based on authenticated user's role
         $dashboardRoute = null;
-        if (auth()->check()) {
-            $role = auth()->user()->role;
+        if (Auth::check()) {
+            $role = Auth::user()->role;
             if ($role === 'petugas') {
                 $dashboardRoute = 'petugas.dashboard';
             } elseif ($role === 'masyarakat') {
