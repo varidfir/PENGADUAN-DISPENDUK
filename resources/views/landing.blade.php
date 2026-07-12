@@ -222,36 +222,30 @@
         }
     @endphp
 
-    <!-- Hero Section -->
-    <section class="hero-gradient text-white py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="hero-panel">
-                    <h2>Selamat Datang di SIPPEL DUKCAPIL</h2>
-                    <p>Gunakan sistem pengaduan ini untuk mengajukan laporan pelayanan DISPENDUKCAPIL secara cepat, aman, dan mudah. Masuk atau daftar untuk mulai mengirim pengaduan kehidupan publik Anda.</p>
-                </div>
-                <div>
-                    <h1 class="text-4xl md:text-5xl font-bold mb-6">Sistem Pengaduan Pelayanan DISPENDUKCAPIL</h1>
-                    <p class="text-lg text-blue-100 mb-8">Sampaikan pengaduan, saran, dan aspirasi Anda tentang pelayanan Dinas Kependudukan dan Pencatatan Sipil dengan mudah melalui platform digital kami.</p>
-                    <div class="flex flex-col gap-4">
-                        @if (!auth()->check())
-                            <div class="flex flex-wrap gap-3 items-center">
-                                <a href="{{ route('login') }}" class="btn-secondary">Buat Pengaduan</a>
-                            </div>
-                            <p class="text-blue-200 text-sm">
-                                Belum punya akun? 
-                                <a href="{{ route('register') }}" class="text-white font-semibold underline hover:text-blue-100">Daftar di sini</a>
-                            </p>
-                        @else
-                            <div class="flex flex-wrap gap-3">
-                                <a href="{{ route($dashboardRoute) }}" class="btn-secondary">Buat Pengaduan</a>
-                            </div>
-                        @endif
-                    </div>
-                </div>
+<!-- Hero Section -->
+<section class="hero-gradient text-white py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Sistem Pengaduan Pelayanan DISPENDUKCAPIL</h1>
+            <p class="text-lg text-blue-100 mb-8">Sampaikan pengaduan, saran, dan aspirasi Anda tentang pelayanan Dinas Kependudukan dan Pencatatan Sipil dengan mudah melalui platform digital kami.</p>
+            
+            <div class="flex justify-center gap-4">
+                @if (!auth()->check())
+                    <a href="{{ route('login') }}" class="btn-secondary">Buat Pengaduan</a>
+                @else
+                    <a href="{{ route($dashboardRoute) }}" class="btn-secondary">Buat Pengaduan</a>
+                @endif
             </div>
+
+            @if (!auth()->check())
+                <p class="text-blue-200 text-sm mt-6">
+                    Belum punya akun? 
+                    <a href="{{ route('register') }}" class="text-white font-semibold underline hover:text-blue-100">Daftar di sini</a>
+                </p>
+            @endif
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Features Section -->
     <section class="py-20 bg-white">
