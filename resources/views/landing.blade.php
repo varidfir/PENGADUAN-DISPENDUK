@@ -17,73 +17,20 @@
         .hero-gradient {
             background: linear-gradient(135deg, #1e40af 0%, #0c4a6e 100%);
         }
-        .banner-carousel {
-            position: relative;
-            width: 100%;
-            height: 350px;
-            overflow: hidden;
-            border-radius: 16px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+        .hero-panel {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 24px;
+            padding: 36px;
         }
-        .banner-item {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 0.8s ease-in-out;
+        .hero-panel h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: #f8fafc;
         }
-        .banner-item.active {
-            opacity: 1;
-        }
-        .banner-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .banner-item-placeholder {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #0c4a6e 0%, #1e3a8a 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .banner-placeholder-icon {
-            font-size: 4rem;
-            opacity: 0.8;
-        }
-        .banner-placeholder-text {
-            font-size: 1.25rem;
-            font-weight: 600;
-            text-align: center;
-        }
-        .carousel-nav {
-            position: absolute;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 8px;
-            z-index: 10;
-        }
-        .carousel-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.6);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .carousel-dot:hover {
-            background: rgba(255, 255, 255, 0.9);
-        }
-        .carousel-dot.active {
-            background: white;
-            width: 28px;
-            border-radius: 5px;
+        .hero-panel p {
+            color: #dbeafe;
+            line-height: 1.75;
         }
         .feature-card {
             transition: all 0.3s ease;
@@ -275,47 +222,14 @@
         }
     @endphp
 
-    <!-- Hero Section with Banner Carousel -->
+    <!-- Hero Section -->
     <section class="hero-gradient text-white py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-2 gap-12 items-center">
-                <!-- Banner Carousel -->
-                <div class="banner-carousel">
-                    @if ($banners->count() > 0)
-                        @foreach ($banners as $index => $banner)
-                            <div class="banner-item {{ $index === 0 ? 'active' : '' }}" data-index="{{ $index }}">
-                                @if ($banner->gambar)
-                                    <img src="{{ asset('storage/' . $banner->gambar) }}" alt="{{ $banner->judul }}">
-                                @else
-                                    <div class="banner-item-placeholder">
-                                        <div class="banner-placeholder-icon">
-                                            <i class="ph-fill ph-megaphone"></i>
-                                        </div>
-                                        <div class="banner-placeholder-text">{{ $banner->judul }}</div>
-                                    </div>
-                                @endif
-                            </div>
-                        @endforeach
-                        @if ($banners->count() > 1)
-                            <div class="carousel-nav">
-                                @foreach ($banners as $index => $banner)
-                                    <span class="carousel-dot {{ $index === 0 ? 'active' : '' }}" onclick="switchBanner({{ $index }})"></span>
-                                @endforeach
-                            </div>
-                        @endif
-                    @else
-                        <div class="banner-item active">
-                            <div class="banner-item-placeholder">
-                                <div class="banner-placeholder-icon">
-                                    <i class="ph-fill ph-megaphone"></i>
-                                </div>
-                                <div class="banner-placeholder-text">Belum ada banner</div>
-                            </div>
-                        </div>
-                    @endif
+                <div class="hero-panel">
+                    <h2>Selamat Datang di SIPPEL DUKCAPIL</h2>
+                    <p>Gunakan sistem pengaduan ini untuk mengajukan laporan pelayanan DISPENDUKCAPIL secara cepat, aman, dan mudah. Masuk atau daftar untuk mulai mengirim pengaduan kehidupan publik Anda.</p>
                 </div>
-
-                <!-- Hero Text -->
                 <div>
                     <h1 class="text-4xl md:text-5xl font-bold mb-6">Sistem Pengaduan Pelayanan DISPENDUKCAPIL</h1>
                     <p class="text-lg text-blue-100 mb-8">Sampaikan pengaduan, saran, dan aspirasi Anda tentang pelayanan Dinas Kependudukan dan Pencatatan Sipil dengan mudah melalui platform digital kami.</p>
@@ -494,51 +408,5 @@
         </div>
     </footer>
 
-    <script>
-        const banners = document.querySelectorAll('.banner-item');
-        const dots = document.querySelectorAll('.carousel-dot');
-        let currentBanner = 0;
-        let autoPlayInterval;
-
-        function showBanner(index) {
-            banners.forEach(banner => banner.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
-            
-            if (banners[index]) {
-                banners[index].classList.add('active');
-            }
-            if (dots[index]) {
-                dots[index].classList.add('active');
-            }
-            
-            currentBanner = index;
-        }
-
-        function switchBanner(index) {
-            showBanner(index);
-            clearInterval(autoPlayInterval);
-            startAutoPlay();
-        }
-
-        function autoNext() {
-            let next = (currentBanner + 1) % banners.length;
-            if (banners.length > 0) {
-                showBanner(next);
-            }
-        }
-
-        function startAutoPlay() {
-            if (banners.length > 1) {
-                autoPlayInterval = setInterval(autoNext, 5000);
-            }
-        }
-
-        // Start auto play on page load
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', startAutoPlay);
-        } else {
-            startAutoPlay();
-        }
-    </script>
 </body>
 </html>

@@ -38,10 +38,6 @@
                 <a href="{{ route('admin.kategoris.index') }}" class="nav-link {{ request()->routeIs('admin.kategoris.*') ? 'active' : '' }}">
                     <i class="ph ph-folders"></i> Kategori
                 </a>
-                <a href="{{ route('admin.banners.index') }}"
-                   class="nav-link {{ request()->routeIs('admin.banners.*') ? 'active' : '' }}">
-                    <i class="ph ph-image"></i> Banner Info
-                </a>
 
                 <p class="nav-title">PENGADUAN & LAPORAN</p>
                 <a href="{{ route('admin.pengaduan.index') }}" class="nav-link {{ request()->routeIs('admin.pengaduan.*') ? 'active' : '' }}">

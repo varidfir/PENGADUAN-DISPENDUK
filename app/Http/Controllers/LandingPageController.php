@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Banner;
 use Illuminate\Http\Request;
 
 class LandingPageController extends Controller
 {
     public function index()
     {
-        // Ambil banner yang aktif
-        $banners = Banner::where('is_active', true)->get();
-        
         // Data fitur/layanan
         $features = [
             [
@@ -49,6 +45,6 @@ class LandingPageController extends Controller
             }
         }
 
-        return view('landing', compact('banners', 'features', 'dashboardRoute'));
+        return view('landing', compact('features', 'dashboardRoute'));
     }
 }
